@@ -1,9 +1,9 @@
 var socket = io();
 
 var video = document.getElementById("localvideo");
-var remotevideo = document.getElementById("remotevideo");
+var peerVideo = document.getElementById("remotevideo");
 var roomname;
-var creater = false;
+var creator = false;
 var rtcPeerConnection;
 var localStreams;
 var iceServers = {
@@ -28,7 +28,7 @@ document.getElementsByTagName("button")[0].addEventListener('click', function() 
 });
 
 socket.on('created', function() {
-  creater = true;
+  creator = true;
   navigator.mediaDevices.getUserMedia({
       audio: true,
       video: { width: 1280, height: 720 },
@@ -46,7 +46,7 @@ socket.on('created', function() {
 });
 
 socket.on('joined', function() {
-  creater = false;
+  creator = false;
   navigator.mediaDevices.getUserMedia({
       audio: true,
       video: { width: 1280, height: 720 },
@@ -62,8 +62,6 @@ socket.on('joined', function() {
     .catch(function(err) {
       alert("error: " + err);
     });
-
-  socket.emit('ready',roomname);
 });
 
 socket.on('full', function() {
@@ -71,10 +69,10 @@ socket.on('full', function() {
 });
 
 socket.on('ready', function() {
-  if(creater){
+  if(creator){
     rtcPeerConnection = new RTCPeerConnection(iceServers);
-    rtcPeerConnection.onicecandidate = onicecandidatefunction;
-    rtcPeerConnection.ontrack = ontrackfunction;
+    rtcPeerConnection.onicecandidate = OnIceCandidateFunction;
+    rtcPeerConnection.ontrack = OnTrackFunction;
     rtcPeerConnection.addTrack(localStreams.getTracks()[0], localStreams);
     rtcPeerConnection.addTrack(localStreams.getTracks()[1], localStreams);
     rtcPeerConnection
@@ -98,10 +96,10 @@ socket.on('candidate', function(candidate) {
 
 
 socket.on('offer', function(offer) {
-  if(!creater){
+  if(!creator){
     rtcPeerConnection = new RTCPeerConnection(iceServers);
-    rtcPeerConnection.onicecandidate = onicecandidatefunction;
-    rtcPeerConnection.ontrack = ontrackfunction;
+    rtcPeerConnection.onicecandidate = OnIceCandidateFunction;
+    rtcPeerConnection.ontrack = OnTrackFunction;
     rtcPeerConnection.addTrack(localStreams.getTracks()[0], localStreams);
     rtcPeerConnection.addTrack(localStreams.getTracks()[1], localStreams);
     rtcPeerConnection.setRemoteDescription(offer);
@@ -125,16 +123,16 @@ socket.on('answer', function(answer) {
 
 
 
-function onicecandidatefunction(event){
+function OnIceCandidateFunction(event){
   if(event.candidate){
     socket.emit('candiate', event.candidate, roomname);
   }
 }
 
 
-function ontrackfunction(event){
-  remotevideo.srcObject = event.streams[0];
-  remotevideo.onloadedmetadata = function(e) {
-  remotevideo.play();
+function OnTrackFunction(event){
+  peerVideo.srcObject = event.streams[0];
+  peerVideo.onloadedmetadata = function(e) {
+  peerVideo.play();
   };
 }
