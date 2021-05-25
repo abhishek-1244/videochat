@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 
 
 
-http.listen(4000, function(){
+http.listen(process.env.PORT || 4000, function(){
   console.log("server is running on port 4000");
 })
 
