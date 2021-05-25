@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js">
+
+
+  </script>
+
+  <title>video call</title>
+</head>
+
+<body>
+  <div class="local-data">
+    <video id="localvideo" width="220px" , height="170px" muted></video>
+    <form class="data-form">
+      <input type="text" name="room" placeholder="Enter room name">
+      <button type="reset" name="button"><strong>JOIN</strong></button>
+    </form>
+  </div>
+  <video id="remotevideo" controls></video>
+
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

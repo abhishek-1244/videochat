@@ -1,0 +1,31 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.local-data{
+  display: flex;
+  justify-content: space-between;
+}
+
+.data-form{
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+input{
+  line-height: 1.5rem;
+}
+
+button{
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: lightblue solid 2px;
+  color: blue;
+}
+
+.remotevideo{
+  position: relative;
+  display:inline-block;
+  margin: auto;
+}
