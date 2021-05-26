@@ -49,7 +49,7 @@ socket.on("created", function () {
     })
     .catch(function (err) {
       /* handle the error */
-      alert("Couldn't Access User Media");
+      alert(err);
     });
 });
 
@@ -72,7 +72,7 @@ socket.on("joined", function () {
     })
     .catch(function (err) {
       /* handle the error */
-      alert("Couldn't Access User Media");
+      alert(err);
     });
 });
 
