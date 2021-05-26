@@ -9,6 +9,10 @@ let roomName;
 let creator = false;
 let rtcPeerConnection;
 let userStream;
+let constraints ={
+  audio: true,
+  video: true,
+}
 
 // Contains the stun server URL we will be using.
 let iceServers = {
@@ -33,10 +37,7 @@ socket.on("created", function () {
   creator = true;
 
   navigator.mediaDevices
-    .getUserMedia({
-      audio: true,
-      video: { width: 1280, height: 720 },
-    })
+    .getUserMedia(constraints)
     .then(function (stream) {
       /* use the stream */
       userStream = stream;
