@@ -59,10 +59,7 @@ socket.on("joined", function () {
   creator = false;
 
   navigator.mediaDevices
-    .getUserMedia({
-      audio: true,
-      video: { width: 1280, height: 720 },
-    })
+    .getUserMedia(constraints)
     .then(function (stream) {
       /* use the stream */
       userStream = stream;
