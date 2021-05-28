@@ -46,18 +46,31 @@ body{
   border-radius: 50px;
 }
 
-.local-video{
+.div-local{
   position: absolute;
   width: 200px;
   height: 150px;
   z-index: 1;
 }
 
-.remote-video{
+.local-video{
+  min-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+.div-remote{
   position: fixed;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
+
+.remote-video{
+  min-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
 
 @media (max-width: 620px) {
   .container{
