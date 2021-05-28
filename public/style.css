@@ -1,65 +1,86 @@
-body {
-  background-color: black;
-  font-family: "Helvetica";
+*{
+  padding: 0;
+  margin: 0;
 }
 
-h2 {
-  font-size: 18px;
-  padding: 10px 20px;
-  color: #ffffff;
+body{
+  background-color: #a9f1df;
+  position: relative;
+}
+.container{
+  background-color: #00ead3;
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+  height: 60vh;
+  margin: auto;
+  margin-top: 10%;
 }
 
-#video-chat-lobby {
+
+.text{
   text-align: center;
-  max-width: 600px;
-  background-color: #141414;
-  margin: 30px auto;
+  margin: 10% 0;
+  font-size: 3.5rem;
 }
 
-#chat-window {
-  height: 400px;
-  overflow: auto;
-  background: #f9f9f9;
-}
-
-#output p {
-  padding: 14px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #e9e9e9;
-  color: #555;
-}
-
-#feedback p {
-  color: #aaa;
-  padding: 14px 0px;
-  margin: 0 20px;
-}
-
-#output strong {
-  color: #000000;
-}
-
-label {
-  box-sizing: border-box;
+.room_name{
   display: block;
-  padding: 10px 20px;
+  margin: auto;
+  line-height: 2.5rem;
+  font-size: 2rem;
+  text-align: center;
+  margin-top:10%;
+  margin-bottom: 10%;
+  border-radius: 20px;
+  outline: none;
 }
 
-input {
-  padding: 20px;
-  box-sizing: border-box;
-  background: #eee;
+.join_btn{
   display: block;
-  width: 100%;
-  background: rgb(255, 253, 253);
-  font-family: Nunito;
-  font-size: 16px;
+  margin: auto;
+  width: 35%;
+  padding: 10px 30px;
+  font-size: 2rem;
+  border: 2px solid blue;
+  border-radius: 50px;
 }
 
-button {
-  background: #141414;
-  color: #fff;
-  font-size: 18px;
-  padding: 12px 0;
+.local-video{
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  z-index: 1;
+}
+
+.remote-video{
+  position: fixed;
   width: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 620px) {
+  .container{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .room_name{
+    width: 90%;
+  }
+
+  .text{
+    margin-top: 30%;
+    font-size: 3rem;
+  }
+  .join_btn{
+    padding: 5px 30px;
+  }
+
+  .local-video{
+    width: 100px;
+    height: 75px;
+  }
+
 }

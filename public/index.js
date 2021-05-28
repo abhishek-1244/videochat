@@ -1,6 +1,6 @@
 window.addEventListener("load", function() {
 
-  let socket = io.connect("https://pure-citadel-16024.herokuapp.com/");
+  let socket = io();
   let divVideoChatLobby = document.getElementById("video-chat-lobby");
   let divVideoChat = document.getElementById("video-chat-room");
   let joinButton = document.getElementById("join");
@@ -40,6 +40,7 @@ window.addEventListener("load", function() {
 
   socket.on("created", function() {
     creator = true;
+    divVideoChat.style = "display:block";
 
     navigator.mediaDevices
       .getUserMedia(constraints)
@@ -62,6 +63,7 @@ window.addEventListener("load", function() {
 
   socket.on("joined", function() {
     creator = false;
+    divVideoChat.style = "display:block";
 
     navigator.mediaDevices
       .getUserMedia(constraints)
