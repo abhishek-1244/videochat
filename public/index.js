@@ -15,13 +15,16 @@ window.addEventListener("load", function() {
 
   let micFlag = true;
   let cameraFlag = true;
+  let flipCameraFlag = true;
   let roomName;
   let creator = false;
   let rtcPeerConnection;
   let userStream;
   let constraints = {
     audio: true,
-    video: true,
+    video: {
+      facingMode: 'user',
+    },
   }
 
   // Contains the stun server URL we will be using.
@@ -222,6 +225,19 @@ window.addEventListener("load", function() {
     } else {
       userStream.getTracks()[1].enabled = false;
       camera.style = "background-color : #bbbbbb";
+    }
+
+  });
+
+  // flip-Camera  event handeler
+  flipCamera.addEventListener("click", function() {
+    flipCameraFlag = !flipCameraFlag;
+    if (flipCameraFlag) {
+      constraints.video.facingMode = 'user';
+      flipCamera.style = "background-color : none";
+    } else {
+      constraints.video.facingMode = 'environment';
+      flipCamera.style = "background-color : #bbbbbb";
     }
 
   });
