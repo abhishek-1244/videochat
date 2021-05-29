@@ -233,45 +233,13 @@ window.addEventListener("load", function() {
   flipCamera.addEventListener("click", function() {
     flipCameraFlag = !flipCameraFlag;
     if (flipCameraFlag) {
+      socket.emit('leave', roomName);
       constraints.video.facingMode = 'user';
-      flipCamera.style = "background-color : none";
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function(stream) {
-          /* use the stream */
-          userStream = stream;
-          divVideoChatLobby.style = "display:none";
-          userVideo.srcObject = stream;
-          userVideo.onloadedmetadata = function(e) {
-            userVideo.play();
-          };
-        })
-        .catch(function(err) {
-          /* handle the error */
-          alert(err);
-        });
-      rtcPeerConnection.ontrack = OnTrackFunction;
-      rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
+      socket.emit("join", roomName);
     } else {
+      socket.emit('leave', roomName);
       constraints.video.facingMode = 'environment';
-      flipCamera.style = "background-color : #bbbbbb";
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function(stream) {
-          /* use the stream */
-          userStream = stream;
-          divVideoChatLobby.style = "display:none";
-          userVideo.srcObject = stream;
-          userVideo.onloadedmetadata = function(e) {
-            userVideo.play();
-          };
-        })
-        .catch(function(err) {
-          /* handle the error */
-          alert(err);
-        });
-      rtcPeerConnection.ontrack = OnTrackFunction;
-      rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
+      socket.emit("join", roomName);
     }
 
   });
