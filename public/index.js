@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
   let constraints = {
     audio: true,
     video: {
-      facingMode: 'user',
+      facingMode: 'environment',
     },
   }
 
