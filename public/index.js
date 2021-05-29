@@ -250,6 +250,7 @@ window.addEventListener("load", function() {
           /* handle the error */
           alert(err);
         });
+      rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
     } else {
       constraints.video.facingMode = 'environment';
       flipCamera.style = "background-color : #bbbbbb";
@@ -268,6 +269,7 @@ window.addEventListener("load", function() {
           /* handle the error */
           alert(err);
         });
+      rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
     }
 
   });
@@ -290,7 +292,7 @@ window.addEventListener("load", function() {
       peerVideo.srcObject.getTracks()[1].stop();
     }
 
-    if(rtcPeerConnection){
+    if (rtcPeerConnection) {
       rtcPeerConnection.ontrack = null;
       rtcPeerConnection.onicecandidate = null;
       rtcPeerConnection.close();
@@ -299,8 +301,8 @@ window.addEventListener("load", function() {
   });
 
   //  call end event handeler.......who opposit of call ender
-  socket.on('leave',()=>{
-    if(rtcPeerConnection){
+  socket.on('leave', () => {
+    if (rtcPeerConnection) {
       rtcPeerConnection.ontrack = null;
       rtcPeerConnection.onicecandidate = null;
       rtcPeerConnection.close();
