@@ -235,9 +235,39 @@ window.addEventListener("load", function() {
     if (flipCameraFlag) {
       constraints.video.facingMode = 'user';
       flipCamera.style = "background-color : none";
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+          /* use the stream */
+          userStream = stream;
+          divVideoChatLobby.style = "display:none";
+          userVideo.srcObject = stream;
+          userVideo.onloadedmetadata = function(e) {
+            userVideo.play();
+          };
+        })
+        .catch(function(err) {
+          /* handle the error */
+          alert(err);
+        });
     } else {
       constraints.video.facingMode = 'environment';
       flipCamera.style = "background-color : #bbbbbb";
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+          /* use the stream */
+          userStream = stream;
+          divVideoChatLobby.style = "display:none";
+          userVideo.srcObject = stream;
+          userVideo.onloadedmetadata = function(e) {
+            userVideo.play();
+          };
+        })
+        .catch(function(err) {
+          /* handle the error */
+          alert(err);
+        });
     }
 
   });
