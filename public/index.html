@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Chat Application</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,12 +18,21 @@
       <button class="join_btn" id="join">Join</button>
     </div>
   </div>
+
+
   <div id="video-chat-room" style="display:none;">
-    <div class="div-local">
-      <video class="local-video" id="user-video" muted></video>
-    </div>
-    <div class="div-remote">
-      <video class="remote-video" id="peer-video"></video>
+    <video class="local-video" id="user-video" muted></video>
+    <video class="remote-video" id="peer-video"></video>
+  </div>
+
+  <div class="buttons-position" id="buttons-div">
+    <div class="buttons">
+      <div class="call-end">
+        <i id="end-call" class="end material-icons">phone_disabled</i>
+      </div>
+        <i id="mic" class="icon material-icons">mic_off</i>
+        <i id="flip-camera"class="icon material-icons">flip_camera_android</i>
+        <i id="camera" class="icon material-icons">videocam_off</i>
     </div>
   </div>
 

@@ -7,6 +7,14 @@ window.addEventListener("load", function() {
   let userVideo = document.getElementById("user-video");
   let peerVideo = document.getElementById("peer-video");
   let roomInput = document.getElementById("roomName");
+  let buttonsDiv = document.getElementById("buttons-div");
+  let mic = document.getElementById("mic");
+  let camera = document.getElementById("camera");
+  let flipCamera = document.getElementById("flip-camera");
+  let endCall = document.getElementById("end-call");
+
+  let micFlag = true;
+  let cameraFlag = true;
   let roomName;
   let creator = false;
   let rtcPeerConnection;
@@ -27,6 +35,9 @@ window.addEventListener("load", function() {
     ],
   };
 
+
+  // event for join button..........
+
   joinButton.addEventListener("click", function() {
     if (roomInput.value == "") {
       alert("Please enter a room name");
@@ -34,6 +45,46 @@ window.addEventListener("load", function() {
       roomName = roomInput.value;
       socket.emit("join", roomName);
     }
+  });
+
+//  mic event handeler....
+  mic.addEventListener("click", function() {
+    micFlag = !micFlag;
+    if(micFlag){
+      userStream.getTracks()[0].enabled=true;
+      mic.style = "background-color : none";
+    }else{
+      userStream.getTracks()[0].enabled=false;
+      mic.style = "background-color : #bbbbbb";
+    }
+  });
+
+// camera event handeler
+  camera.addEventListener("click", function() {
+    cameraFlag = !cameraFlag;
+    if(cameraFlag){
+      userStream.getTracks()[1].enabled=true;
+      camera.style = "background-color : none";
+    }else{
+      userStream.getTracks()[1].enabled=false;
+      camera.style = "background-color : #bbbbbb";
+    }
+
+  });
+
+//  call end event handeler.......
+  endCall.addEventListener("click", function() {
+
+  });
+
+
+  // event for peervideo...............
+
+  peerVideo.addEventListener("click", () => {
+    buttonsDiv.classList.add("unhide")
+    setTimeout(() => {
+      buttonsDiv.classList.remove("unhide");
+    }, 15000);
   });
 
   // Triggered when a room is succesfully created.
@@ -57,6 +108,14 @@ window.addEventListener("load", function() {
         /* handle the error */
         alert(err);
       });
+
+
+    //  on start button switching
+    buttonsDiv.classList.add("unhide");
+    setTimeout(() => {
+      buttonsDiv.classList.remove("unhide");
+      buttonsDiv.classList.add("hide");
+    }, 5000);
   });
 
   // Triggered when a room is succesfully joined.
@@ -81,6 +140,13 @@ window.addEventListener("load", function() {
         /* handle the error */
         alert(err);
       });
+    //  on start button switching
+    buttonsDiv.classList.add("unhide");
+    setTimeout(() => {
+      buttonsDiv.classList.remove("unhide");
+      buttonsDiv.classList.add("hide");
+    }, 5000);
+
   });
 
   // Triggered when a room is full (meaning has 2 people).
