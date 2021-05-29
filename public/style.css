@@ -109,12 +109,6 @@ body{
   border-radius: 25px;
 }
 
-.icon:hover{
-  background-color: #bbbbbb;
-  cursor: pointer;
-}
-
-
 @media (max-width: 620px) {
   .container{
     width: 100vw;
