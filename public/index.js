@@ -250,6 +250,7 @@ window.addEventListener("load", function() {
           /* handle the error */
           alert(err);
         });
+      rtcPeerConnection.ontrack = OnTrackFunction;
       rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
     } else {
       constraints.video.facingMode = 'environment';
@@ -269,6 +270,7 @@ window.addEventListener("load", function() {
           /* handle the error */
           alert(err);
         });
+      rtcPeerConnection.ontrack = OnTrackFunction;
       rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
     }
 
