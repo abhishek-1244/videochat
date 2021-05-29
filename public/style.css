@@ -109,6 +109,10 @@ body{
   border-radius: 25px;
 }
 
+.icon:hover{
+  cursor: pointer;
+}
+
 @media (max-width: 620px) {
   .container{
     width: 100vw;

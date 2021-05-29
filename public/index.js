@@ -47,45 +47,6 @@ window.addEventListener("load", function() {
     }
   });
 
-//  mic event handeler....
-  mic.addEventListener("click", function() {
-    micFlag = !micFlag;
-    if(micFlag){
-      userStream.getTracks()[0].enabled=true;
-      mic.style = "background-color : none";
-    }else{
-      userStream.getTracks()[0].enabled=false;
-      mic.style = "background-color : #bbbbbb";
-    }
-  });
-
-// camera event handeler
-  camera.addEventListener("click", function() {
-    cameraFlag = !cameraFlag;
-    if(cameraFlag){
-      userStream.getTracks()[1].enabled=true;
-      camera.style = "background-color : none";
-    }else{
-      userStream.getTracks()[1].enabled=false;
-      camera.style = "background-color : #bbbbbb";
-    }
-
-  });
-
-//  call end event handeler.......
-  endCall.addEventListener("click", function() {
-
-  });
-
-
-  // event for peervideo...............
-
-  peerVideo.addEventListener("click", () => {
-    buttonsDiv.classList.add("unhide")
-    setTimeout(() => {
-      buttonsDiv.classList.remove("unhide");
-    }, 15000);
-  });
 
   // Triggered when a room is succesfully created.
 
@@ -229,4 +190,83 @@ window.addEventListener("load", function() {
       peerVideo.play();
     };
   }
+
+
+  // event for onclick peervideo...............
+
+  peerVideo.addEventListener("click", () => {
+    buttonsDiv.classList.add("unhide")
+    setTimeout(() => {
+      buttonsDiv.classList.remove("unhide");
+    }, 15000);
+  });
+
+  //  mic event handeler....
+  mic.addEventListener("click", function() {
+    micFlag = !micFlag;
+    if (micFlag) {
+      userStream.getTracks()[0].enabled = true;
+      mic.style = "background-color : none";
+    } else {
+      userStream.getTracks()[0].enabled = false;
+      mic.style = "background-color : #bbbbbb";
+    }
+  });
+
+  // camera event handeler
+  camera.addEventListener("click", function() {
+    cameraFlag = !cameraFlag;
+    if (cameraFlag) {
+      userStream.getTracks()[1].enabled = true;
+      camera.style = "background-color : none";
+    } else {
+      userStream.getTracks()[1].enabled = false;
+      camera.style = "background-color : #bbbbbb";
+    }
+
+  });
+
+  //  call end event handeler.......who clicks end button
+  endCall.addEventListener("click", function() {
+    socket.emit('leave', roomName);
+    buttonsDiv.classList.remove("unhide");
+    buttonsDiv.classList.add("hide");
+    divVideoChat.style = "display:none";
+    divVideoChatLobby.style = "display:flex";
+
+    if (userVideo.srcObject) {
+      userVideo.srcObject.getTracks()[0].stop();
+      userVideo.srcObject.getTracks()[1].stop();
+    }
+
+    if (peerVideo.srcObject) {
+      peerVideo.srcObject.getTracks()[0].stop();
+      peerVideo.srcObject.getTracks()[1].stop();
+    }
+
+    if(rtcPeerConnection){
+      rtcPeerConnection.ontrack = null;
+      rtcPeerConnection.onicecandidate = null;
+      rtcPeerConnection.close();
+      rtcPeerConnection = null;
+    }
+  });
+
+  //  call end event handeler.......who opposit of call ender
+  socket.on('leave',()=>{
+    if(rtcPeerConnection){
+      rtcPeerConnection.ontrack = null;
+      rtcPeerConnection.onicecandidate = null;
+      rtcPeerConnection.close();
+      rtcPeerConnection = null;
+    }
+
+    if (peerVideo.srcObject) {
+      peerVideo.srcObject.getTracks()[0].stop();
+      peerVideo.srcObject.getTracks()[1].stop();
+    }
+
+  })
+
+
 });
