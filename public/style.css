@@ -109,6 +109,9 @@ body{
   border-radius: 25px;
 }
 
+.icon:active{
+  background-color: #bbbbbb;
+}
 .icon:hover{
   cursor: pointer;
 }
